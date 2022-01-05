@@ -42,7 +42,7 @@ sudo systemctl enable solr
 sudo systemctl start solr
 
 sudo mkdir /solrdata/data/configsets
-sudo cp -R configsets/ulysses /sorldata/data/configsets
+sudo cp -R configsets/ulysses /solrdata/data/configsets
 sudo chown -R solr:solr /solrdata/data/configsets
 
 sudo systemctl restart solr

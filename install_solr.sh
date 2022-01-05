@@ -35,6 +35,16 @@ WantedBy=multi-user.target
 EOT
 sudo mv solr.service /etc/systemd/system/
 sudo systemctl stop solr
+echo SOLR_JAVA_MEM="-Xms2g -Xmx12g" | sudo tee -a /etc/default/solr.in.sh
+
 sudo systemctl daemon-reload
 sudo systemctl enable solr
 sudo systemctl start solr
+
+sudo mkdir /solrdata/data/configsets
+sudo cp -R configsets/ulysses /sorldata/data/configsets
+sudo chown -R solr:solr /solrdata/data/configsets
+
+sudo systemctl restart solr
+curl "http://localhost:8983/solr/admin/cores?action=CREATE&name=vwfs&configSet=ulysses"
+
